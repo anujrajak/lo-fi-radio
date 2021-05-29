@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lo-fi-radio/static/css/main.e89938e1.chunk.css",
-    "main.js": "/lo-fi-radio/static/js/main.0a6c347e.chunk.js",
-    "main.js.map": "/lo-fi-radio/static/js/main.0a6c347e.chunk.js.map",
+    "main.js": "/lo-fi-radio/static/js/main.f23f9812.chunk.js",
+    "main.js.map": "/lo-fi-radio/static/js/main.f23f9812.chunk.js.map",
     "runtime-main.js": "/lo-fi-radio/static/js/runtime-main.b0cdcaa5.js",
     "runtime-main.js.map": "/lo-fi-radio/static/js/runtime-main.b0cdcaa5.js.map",
     "static/js/2.094dfc09.chunk.js": "/lo-fi-radio/static/js/2.094dfc09.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b0cdcaa5.js",
     "static/js/2.094dfc09.chunk.js",
     "static/css/main.e89938e1.chunk.css",
-    "static/js/main.0a6c347e.chunk.js"
+    "static/js/main.f23f9812.chunk.js"
   ]
 }
