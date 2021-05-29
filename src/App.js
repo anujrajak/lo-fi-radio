@@ -8,20 +8,20 @@ import Player from "./components/Player";
 import { fetchQuote, suffleList } from './Utils/HelperFunctions';
 import React from "react";
 
-
 function App() {
   const [quote, setQuote] = useState();
   const [theme, setTheme] = useState(gifsData);
   const [currentTheme, setCurrentTheme] = useState();
   const [station, setStation] = useState();
+  const [isPlaying, setPLaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetchQuote().then(data => { setQuote(data.text); });
     setTheme(suffleList(gifsData));
     setCurrentTheme(theme[0]);
-    setStation(stations[0]);
-  }, []);
+    // setStation(stations[0]);
+  }, [theme]);
 
   /**
    * I'll explain later why i'm using this custom hook.
@@ -60,14 +60,21 @@ function App() {
     const station = stations.find((obj) => {
       return obj.key === value;
     });
-
     setStation(station);
   };
+
+  const playVideo = (e) => {
+    setStation({
+      name: "Lofi Girl",
+      key: "5qap5aO4i9A",
+    });
+    setPLaying(true);
+  }
 
   return (
     <>
       <Player station={station} />
-      <div className="app">
+      <div className="app" unselectable="on">
         <Main>
           <img src={`assets/${currentTheme}`} alt="" />
           {/* <img src={`assets/comition_sky_left_to_right.gif`} alt="" /> */}
@@ -80,7 +87,8 @@ function App() {
             <p id="heading">Lo-Fi Radio</p>
             <p id="quote">{quote}</p>
             {/* <p style={{ textTransform: "uppercase" }}>{station.name}</p> */}
-            <select name="cars" id="cars" onChange={changeStation}>
+            {!isPlaying && <button onClick={playVideo}>PLAY</button>}
+            {station && station.key && <select name="cars" id="cars" onChange={changeStation}>
               {stations &&
                 stations.map((station) => {
                   return (
@@ -93,7 +101,7 @@ function App() {
                     </option>
                   );
                 })}
-            </select>
+            </select> }
           </div>
         </Section>
         <Footer className="footer">
@@ -132,18 +140,6 @@ const Section = styled.div`
       color: #f5f5f5;
       filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 1));
     }
-
-    button {
-      border: none;
-      font-family: "Press Start 2P";
-      font-weight: bold;
-      background: rgb(255 255 255 / 20%);
-      height: 30px;
-      border-radius: 5px;
-      letter-spacing: 3px;
-      color: #f5f5f5;
-      text-shadow: 2px 2px 0 #020406;
-    }
   }
 
   div {
@@ -172,6 +168,19 @@ const Section = styled.div`
 
     p#quote {
       line-height: 20px;
+    }
+
+    button {
+      border: none;
+      font-family: "Press Start 2P";
+      font-weight: bold;
+      background: rgb(255 255 255 / 20%);
+      height: 30px;
+      border-radius: 5px;
+      letter-spacing: 3px;
+      color: #f5f5f5;
+      text-shadow: 2px 2px 0 #020406;
+      width: 150px;
     }
 
     select {
