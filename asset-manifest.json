@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/lo-fi-radio/static/css/main.e89938e1.chunk.css",
+    "main.js": "/lo-fi-radio/static/js/main.0a6c347e.chunk.js",
+    "main.js.map": "/lo-fi-radio/static/js/main.0a6c347e.chunk.js.map",
+    "runtime-main.js": "/lo-fi-radio/static/js/runtime-main.b0cdcaa5.js",
+    "runtime-main.js.map": "/lo-fi-radio/static/js/runtime-main.b0cdcaa5.js.map",
+    "static/js/2.094dfc09.chunk.js": "/lo-fi-radio/static/js/2.094dfc09.chunk.js",
+    "static/js/2.094dfc09.chunk.js.map": "/lo-fi-radio/static/js/2.094dfc09.chunk.js.map",
+    "static/js/3.b4b95c01.chunk.js": "/lo-fi-radio/static/js/3.b4b95c01.chunk.js",
+    "static/js/3.b4b95c01.chunk.js.map": "/lo-fi-radio/static/js/3.b4b95c01.chunk.js.map",
+    "index.html": "/lo-fi-radio/index.html",
+    "static/css/main.e89938e1.chunk.css.map": "/lo-fi-radio/static/css/main.e89938e1.chunk.css.map",
+    "static/js/2.094dfc09.chunk.js.LICENSE.txt": "/lo-fi-radio/static/js/2.094dfc09.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b0cdcaa5.js",
+    "static/js/2.094dfc09.chunk.js",
+    "static/css/main.e89938e1.chunk.css",
+    "static/js/main.0a6c347e.chunk.js"
+  ]
+}
