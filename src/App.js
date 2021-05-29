@@ -69,7 +69,7 @@ function App() {
       <Player station={station} />
       <div className="app">
         <Main>
-          <img src={`assets/${currentTheme}`} alt="" />
+          <img src={`./lo-fi-radio/assets/${currentTheme}`} alt="" />
           {/* <img src={`assets/comition_sky_left_to_right.gif`} alt="" /> */}
         </Main>
         <Section>
