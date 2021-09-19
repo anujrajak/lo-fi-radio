@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import gifsData from "./data";
 import stations from "./data/Stations";
 import Player from "./components/Player";
-import StationList from "./components/StationList";
+// import StationList from "./components/StationList";
 
 import { fetchQuote, suffleList } from './Utils/HelperFunctions';
 import React from "react";
@@ -64,14 +64,14 @@ function App() {
     setCurrentTheme(theme[currentIndex]);
   }, 10000);
 
-  const changeStation = (e) => {
-    const value = e.target.value;
-    const station = stations.find((obj) => {
-      return obj.key === value;
-    });
-    setCurrentStation(station);
-    setStation(station);
-  };
+  // const changeStation = (e) => {
+  //   const value = e.target.value;
+  //   const station = stations.find((obj) => {
+  //     return obj.key === value;
+  //   });
+  //   setCurrentStation(station);
+  //   setStation(station);
+  // };
 
   const playNext = function () {
     let stationIndex = stationData.findIndex(st => currentStation.name === st.name);
@@ -103,7 +103,7 @@ function App() {
     } else {
       setStation();
     }
-  }, [isPlaying]);
+  }, [isPlaying, currentStation]);
 
   const playVideo = (control) => {
     setPLaying(control === 'play' ? true : false);
