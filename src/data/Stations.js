@@ -8,6 +8,18 @@ const stations = [
         key: "bmVKaAV_7-A",
     },
     {
+        name: 'Bootleg boy',
+        key: '21qNxnCS8WU'
+    },
+    {
+        name: 'LoFi Jazz',
+        key: 'esX7SFtEjHg'
+    },
+    {
+        name: 'Anime LoFi',
+        key: 'NAbQimfaRyw'
+    },
+    {
         name: "Chill Radio",
         key: "21qNxnCS8WU",
     },
@@ -24,25 +36,17 @@ const stations = [
         key: "2atQnvunGCo",
     },
     {
-        name: "Chillhop Radio",
+        name: "Chill Hop",
         key: "5yx6BWlEVcY",
     },
     {
-        name: "Galaxy Walk Radio",
+        name: "Galaxy Walk",
         key: "w3j6XXB57KM",
     },
     {
-        name: "Hip-Hop Radio",
+        name: "Hip-Hop",
         key: "MCkTebktHVc",
-    },
-    {
-        name: "Space Lo-Fi Radio",
-        key: "yXa2_m0fhzQ",
-    },
-    {
-        name: "Indie Radio",
-        key: "yGY4ZIJ7sWE",
-    },
+    }
 ];
 
 export default stations;

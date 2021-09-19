@@ -16,6 +16,7 @@ function App() {
   const [station, setStation] = useState();
   const [stationData, setStationData] = useState();
   const [isPlaying, setPLaying] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStation, setCurrentStation] = useState({
     name: "Lofi Girl",
@@ -125,7 +126,7 @@ function App() {
             <p id="heading">Lo-Fi Radio</p>
             <p id="quote">{quote}</p>
             <p id="quote">
-              <span>
+              <span style={{ fontSize: '13px' }}>
                 <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 30 30"> <path d="M2 20h20V6h-7V4h-2v2h-2V4H9v2H2v14zM9 4V2H7v2h2zm6 0h2V2h-2v2zm5 4v10H4V8h16z" fill="currentColor" /> </svg>
                 {currentStation.name}
               </span>
@@ -165,9 +166,31 @@ function App() {
         </Section>
         {/* <StationList stationData={stationData} /> */}
         <Footer className="footer">
-          <span>
-          <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M3 3h2v18H3V3zm16 0H5v2h14v14H5v2h16V3h-2zm-8 6h2V7h-2v2zm2 8h-2v-6h2v6z" fill="currentColor"/> </svg>
+          <span onClick={() => { setShowInfo(!showInfo) }}>
+            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M3 3h2v18H3V3zm16 0H5v2h14v14H5v2h16V3h-2zm-8 6h2V7h-2v2zm2 8h-2v-6h2v6z" fill="currentColor"/> </svg>
           </span>
+          {showInfo && <ul>
+            <li>
+              <a href="http://anujrajak.github.io/" target="_blank" rel="noopener noreferrer">
+                Me
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/anujrajak" target="_blank" rel="noopener noreferrer">
+                Github
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/lofiradioapp/" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a href="mailto:mr.anujrajak@gmail.com" target="_blank" rel="noopener noreferrer">
+                Mail
+              </a>
+            </li>
+          </ul>}
         </Footer>
       </div>
     </>
@@ -275,9 +298,13 @@ const Footer = styled.div`
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   padding: 10px;
+  align-items: center;
+
+  font-size: 10px;
+  text-transform: capitalize;
 
   span {
     width: 40px;
