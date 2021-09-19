@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import gifsData from "./data";
 import stations from "./data/Stations";
 import Player from "./components/Player";
+import StationList from "./components/StationList";
 
 import { fetchQuote, suffleList } from './Utils/HelperFunctions';
 import React from "react";
@@ -13,13 +14,19 @@ function App() {
   const [theme, setTheme] = useState(gifsData);
   const [currentTheme, setCurrentTheme] = useState();
   const [station, setStation] = useState();
+  const [stationData, setStationData] = useState();
   const [isPlaying, setPLaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentStation, setCurrentStation] = useState({
+    name: "Lofi Girl",
+    key: "5qap5aO4i9A",
+  });
 
   useEffect(() => {
     fetchQuote().then(data => { setQuote(data.text); });
     setTheme(suffleList(gifsData));
     setCurrentTheme(theme[0]);
+    setStationData(stations);
     // setStation(stations[0]);
   }, [theme]);
 
@@ -47,28 +54,59 @@ function App() {
   };
 
   useInterval(() => {
-    setCurrentTheme(theme[currentIndex]);
-    if (theme.length === currentIndex) {
+    if (!theme[currentIndex]) {
       setCurrentIndex(0);
+      setCurrentTheme(theme[0]);
+      return;
     } else {
-      setCurrentIndex(currentIndex+1)
+      setCurrentIndex(currentIndex + 1);
     }
-  }, 6000);
+    setCurrentTheme(theme[currentIndex]);
+  }, 10000);
 
   const changeStation = (e) => {
     const value = e.target.value;
     const station = stations.find((obj) => {
       return obj.key === value;
     });
+    setCurrentStation(station);
     setStation(station);
   };
 
-  const playVideo = (e) => {
-    setStation({
-      name: "Lofi Girl",
-      key: "5qap5aO4i9A",
-    });
-    setPLaying(true);
+  const playNext = function () {
+    let stationIndex = stationData.findIndex(st => currentStation.name === st.name);
+    ++stationIndex;
+    if (stationData.length <= stationIndex) {
+      stationIndex = 0
+    }
+    setCurrentStation(stationData[stationIndex]);
+    if (isPlaying) {
+      setStation(stationData[stationIndex]);
+    }
+  };
+
+  const playPrev = function() {
+    let stationIndex = stationData.findIndex(st => currentStation.name === st.name);
+    --stationIndex;
+    if (stationIndex < 0) {
+      stationIndex = stationData.length - 1;
+    }
+    setCurrentStation(stationData[stationIndex]);
+    if (isPlaying) {
+      setStation(stationData[stationIndex]);
+    }
+  };
+
+  useEffect(() => {
+    if (isPlaying) {
+      setStation(currentStation);
+    } else {
+      setStation();
+    }
+  }, [isPlaying]);
+
+  const playVideo = (control) => {
+    setPLaying(control === 'play' ? true : false);
   }
 
   return (
@@ -77,20 +115,41 @@ function App() {
       <div className="app" unselectable="on">
         <Main>
           <img src={`assets/${currentTheme}`} alt="" />
-          {/* <img src={`assets/comition_sky_left_to_right.gif`} alt="" /> */}
+          {/* <img src={`assets/bridge-day.gif`} alt="" /> */}
         </Main>
         <Section>
           {/* <span>
           <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm16 5H4v2h16v-2z" fill="currentColor"/> </svg>
           </span> */}
-          <div>
+          <div id='radioContent'>
             <p id="heading">Lo-Fi Radio</p>
             <p id="quote">{quote}</p>
-            {/* <p style={{ textTransform: "uppercase" }}>{station.name}</p> */}
-            {!isPlaying && <button onClick={playVideo}>PLAY</button>}
-            {station && station.key && <select name="cars" id="cars" onChange={changeStation}>
+            <p id="quote">
+              <span>
+                <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 30 30"> <path d="M2 20h20V6h-7V4h-2v2h-2V4H9v2H2v14zM9 4V2H7v2h2zm6 0h2V2h-2v2zm5 4v10H4V8h16z" fill="currentColor" /> </svg>
+                {currentStation.name}
+              </span>
+            </p>
+            <p style={{ textTransform: "uppercase" }}>
+              <span>
+                <span onClick={playPrev}>
+                  <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M6 4h2v16H6V4zm12 0h-2v2h-2v3h-2v2h-2v2h2v3h2v2h2v2h2V4z" fill="currentColor" /> </svg>
+                </span>
+
+                {!isPlaying && <span onClick={() => { playVideo('play') }}><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2v2z" fill="currentColor" /> </svg></span>}
+
+                {isPlaying && <span onClick={() => { playVideo('pause') }}><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M10 4H5v16h5V4zm9 0h-5v16h5V4z" fill="currentColor" /> </svg></span>}
+
+                <span onClick={playNext}>
+                  <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M6 4h2v2h2v2h2v2h2v4h-2v2h-2v2H8v2H6V4zm12 0h-2v16h2V4z" fill="currentColor" /> </svg>
+                </span>
+
+              </span>
+            </p>
+            {/* {!isPlaying && <button onClick={playVideo}>PLAY</button>} */}
+            {/* {station && station.key && <select name="cars" id="cars" onChange={changeStation}>
               {stations &&
-                stations.map((station) => {
+                stationData.map((station) => {
                   return (
                     <option
                       className="opt"
@@ -101,12 +160,13 @@ function App() {
                     </option>
                   );
                 })}
-            </select> }
+            </select> } */}
           </div>
         </Section>
+        {/* <StationList stationData={stationData} /> */}
         <Footer className="footer">
           <span>
-
+          <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M3 3h2v18H3V3zm16 0H5v2h14v14H5v2h16V3h-2zm-8 6h2V7h-2v2zm2 8h-2v-6h2v6z" fill="currentColor"/> </svg>
           </span>
         </Footer>
       </div>
@@ -142,7 +202,7 @@ const Section = styled.div`
     }
   }
 
-  div {
+  div#radioContent {
     padding: 1rem;
     position: absolute;
     top: 50%;
@@ -157,6 +217,15 @@ const Section = styled.div`
     p {
       color: #f5f5f5;
       text-shadow: 2px 2px 0 #020406;
+
+      span {
+        position: inherit;
+        margin: 0 20px;
+      }
+    }
+
+    div#listStaion {
+      position: relative;
     }
 
     p#heading {
@@ -167,7 +236,7 @@ const Section = styled.div`
     }
 
     p#quote {
-      line-height: 20px;
+      line-height: 15px;
     }
 
     button {
@@ -209,4 +278,11 @@ const Footer = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 10px;
+
+  span {
+    width: 40px;
+    color: #f5f5f5;
+    -webkit-filter: drop-shadow(2px 2px 0px rgba(0,0,0,1));
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,1));
+  }
 `;
