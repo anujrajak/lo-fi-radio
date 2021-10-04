@@ -15,6 +15,7 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState();
   const [station, setStation] = useState();
   const [stationData, setStationData] = useState();
+  const [volume, setVolume] = useState(50);
   const [isPlaying, setPLaying] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -110,9 +111,19 @@ function App() {
     setPLaying(control === 'play' ? true : false);
   }
 
+  const changeVolume = (type) => {
+      if (volume !== 100 && type === "inc") {
+        setVolume(volume+10)
+      } else if (volume !== 0 && type === "dec") {
+        setVolume(volume-10)
+      } else {
+        setVolume(0)
+      }
+  }
+
   return (
     <>
-      <Player station={station} />
+      <Player station={station} volume={volume}/>
       <div className="app" unselectable="on">
         <Main>
           <img src={`assets/${currentTheme}`} alt="" />
@@ -140,9 +151,13 @@ function App() {
                 {!isPlaying && <span onClick={() => { playVideo('play') }}><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2v2z" fill="currentColor" /> </svg></span>}
 
                 {isPlaying && <span onClick={() => { playVideo('pause') }}><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M10 4H5v16h5V4zm9 0h-5v16h5V4z" fill="currentColor" /> </svg></span>}
-
                 <span onClick={playNext}>
                   <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M6 4h2v2h2v2h2v2h2v4h-2v2h-2v2H8v2H6V4zm12 0h-2v16h2V4z" fill="currentColor" /> </svg>
+                </span>
+                <span>
+                <span onClick={()=> {changeVolume('dec')}}>-</span>
+                <span onClick={()=> {changeVolume('mute')}}>{volume?"Mute":"Unmute"}</span>
+                <span onClick={()=> {changeVolume('inc')}}>+</span>
                 </span>
 
               </span>
