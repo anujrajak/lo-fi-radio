@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import YouTube from 'react-youtube';
 
-function Player({ station }) {
+function Player({ station, volume }) {
 
   const [opts, setOpts] = useState();
 
@@ -21,6 +21,7 @@ function Player({ station }) {
 
   const _onReady = (event) => {
     event.target.playVideo();
+    event.target.setVolume(volume);
   }
 
   return (
