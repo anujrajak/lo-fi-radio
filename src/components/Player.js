@@ -6,6 +6,7 @@ function Player({ station, volume }) {
 
   const [opts, setOpts] = useState();
 
+  // Initializing player whenever this component mounts 
   useEffect(() => {
     setOpts({
       vq: 'tiny',
