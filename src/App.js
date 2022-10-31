@@ -87,7 +87,7 @@ function App() {
     }
   };
 
-  const playPrev = function() {
+  const playPrev = function () {
     let stationIndex = stationData.findIndex(st => currentStation.name === st.name);
     --stationIndex;
     if (stationIndex < 0) {
@@ -112,18 +112,18 @@ function App() {
   }
 
   const changeVolume = (type) => {
-      if (volume !== 100 && type === "inc") {
-        setVolume(volume+10)
-      } else if (volume !== 0 && type === "dec") {
-        setVolume(volume-10)
-      } else {
-        setVolume(0)
-      }
+    if (volume !== 100 && type === "inc") {
+      setVolume(volume + 10)
+    } else if (volume !== 0 && type === "dec") {
+      setVolume(volume - 10)
+    } else {
+      setVolume(0)
+    }
   }
 
   return (
     <>
-      <Player station={station} volume={volume}/>
+      <Player station={station} volume={volume} />
       <div className="app" unselectable="on">
         <Main>
           <img src={`assets/${currentTheme}`} alt="" />
@@ -155,9 +155,9 @@ function App() {
                   <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M6 4h2v2h2v2h2v2h2v4h-2v2h-2v2H8v2H6V4zm12 0h-2v16h2V4z" fill="currentColor" /> </svg>
                 </span>
                 <span>
-                <span onClick={()=> {changeVolume('dec')}}>-</span>
-                <span onClick={()=> {changeVolume('mute')}}>{volume?"Mute":"Unmute"}</span>
-                <span onClick={()=> {changeVolume('inc')}}>+</span>
+                  <span onClick={() => { changeVolume('dec') }}>-</span>
+                  <span onClick={() => { changeVolume('mute') }}>{volume ? "Mute" : "Unmute"}</span>
+                  <span onClick={() => { changeVolume('inc') }}>+</span>
                 </span>
 
               </span>
@@ -182,7 +182,7 @@ function App() {
         {/* <StationList stationData={stationData} /> */}
         <Footer className="footer">
           <span onClick={() => { setShowInfo(!showInfo) }}>
-            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M3 3h2v18H3V3zm16 0H5v2h14v14H5v2h16V3h-2zm-8 6h2V7h-2v2zm2 8h-2v-6h2v6z" fill="currentColor"/> </svg>
+            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M3 3h2v18H3V3zm16 0H5v2h14v14H5v2h16V3h-2zm-8 6h2V7h-2v2zm2 8h-2v-6h2v6z" fill="currentColor" /> </svg>
           </span>
           {showInfo && <ul>
             <li>
