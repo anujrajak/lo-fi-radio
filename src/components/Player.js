@@ -26,9 +26,9 @@ function Player({ station, volume }) {
   }
 
   return (
-      <div>
-        {station && station.key && <YouTube videoId={station.key} opts={opts} onReady={_onReady} allow="autoplay" style={{ display: 'none'}} />}
-      </div>
+    <div>
+      {station && station.key && <YouTube videoId={station.key} opts={opts} onReady={_onReady} allow="autoplay" style={{ display: 'none' }} />}
+    </div>
   )
 }
 
